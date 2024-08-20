@@ -24,6 +24,18 @@
                                 <label for="txtDescripcion">Descripción:</label>
                                 <input type="text" class="form-control" placeholder="Ingrese alguna ciudad" name="txtDescripcion" id="txtDescripcion">
                             </div>
+
+                            {# Esta bloque busca el mensaje de error #}
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    <strong>Cuidado!</strong> {{ message }}
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary" name="btnGuardar" id="btnGuardar">Guardar</button>
