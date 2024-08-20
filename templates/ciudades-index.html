@@ -45,6 +45,21 @@
                           </div>
                         </td>
                       </tr>
+                      {% for item in lista_ciudades %}
+                      <tr>
+                        <td>{{ item['descripcion'] }}</td>
+                        <td>
+                          <div class="row">
+                            <div class="col col-md-2">
+                              <button type="button" class="btn btn-primary">Editar</button>
+                            </div>
+                            <div class="col col-md-2">
+                              <button type="button" class="btn btn-danger">Eliminar</button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      {% endfor %}
                     </tbody>
                 </table>
 

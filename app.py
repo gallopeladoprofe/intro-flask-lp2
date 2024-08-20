@@ -21,7 +21,10 @@ def contacto2():
 
 @app.route('/ciudades-index')
 def ciudades_index():
-    return render_template('ciudades-index.html')
+    # Creacion de la instancia de ciudaddao
+    ciudadDao = CiudadDao()
+    lista_ciudades = ciudadDao.getCiudades()
+    return render_template('ciudades-index.html', lista_ciudades=lista_ciudades)
 
 @app.route('/ciudades')
 def ciudades():

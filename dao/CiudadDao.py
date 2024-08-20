@@ -19,7 +19,13 @@ class CiudadDao:
             # trae datos de la bd
             lista_ciudades = cur.fetchall()
             # retorno los datos
-            return lista_ciudades
+            lista_ordenada = []
+            for item in lista_ciudades:
+                lista_ordenada.append({
+                    "id": item[0],
+                    "descripcion": item[1]
+                })
+            return lista_ordenada
         except con.Error as e:
             print(e)
         finally:
