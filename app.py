@@ -19,6 +19,10 @@ def contacto():
 def contacto2():
     return render_template('contacto.html')
 
+@app.route('/ciudades-index')
+def ciudades_index():
+    return render_template('ciudades-index.html')
+
 @app.route('/ciudades')
 def ciudades():
     return render_template('ciudades.html')

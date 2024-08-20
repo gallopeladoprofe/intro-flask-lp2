@@ -1,4 +1,5 @@
 # Data access object - DAO
+from flask import current_app as app
 from conexion.Conexion import Conexion
 
 class CiudadDao:
@@ -43,9 +44,9 @@ class CiudadDao:
 
             return True
 
-        # Si algo fall entra aqui
+        # Si algo fallo entra aqui
         except con.Error as e:
-            print(e)
+            app.logger.info(e)
 
         # Siempre se va ejecutar
         finally:
