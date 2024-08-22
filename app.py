@@ -47,7 +47,7 @@ def guardarCiudad():
     flash('Guardado exitoso', 'success')
 
     # redireccionar a la vista ciudades
-    return redirect(url_for('ciudades'))
+    return redirect(url_for('ciudades_index'))
 
 @app.route('/guardar-mascota', methods=['POST'])
 def guardarMascota():
