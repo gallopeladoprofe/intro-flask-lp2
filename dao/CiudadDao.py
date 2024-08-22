@@ -116,3 +116,33 @@ class CiudadDao:
             con.close()
 
         return False
+
+    def deleteCiudad(self, id):
+
+        updateCiudadSQL = """
+        DELETE FROM ciudades
+        WHERE id=%s
+        """
+
+        conexion = Conexion()
+        con = conexion.getConexion()
+        cur = con.cursor()
+
+        # Ejecucion exitosa
+        try:
+            cur.execute(updateCiudadSQL, (id,))
+            # se confirma la insercion
+            con.commit()
+
+            return True
+
+        # Si algo fallo entra aqui
+        except con.Error as e:
+            app.logger.info(e)
+
+        # Siempre se va ejecutar
+        finally:
+            cur.close()
+            con.close()
+
+        return False

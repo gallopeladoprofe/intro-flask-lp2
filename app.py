@@ -75,6 +75,12 @@ def guardarMascota():
     nombreMascota = request.form.get('txtNombreMascota')
     return f"Ya llego tu mascota <strong>{nombreMascota}</strong> al servidor"
 
+@app.route('/ciudades-eliminar/<id>')
+def ciudadesEliminar(id):
+    ciudaddao = CiudadDao()
+    ciudaddao.deleteCiudad(id)
+    return redirect(url_for('ciudades_index'))
+
 # se pregunta por el proceso principal
 if __name__=='__main__':
     app.run(debug=True)
