@@ -27,7 +27,32 @@ class CiudadDao:
                 })
             return lista_ordenada
         except con.Error as e:
-            print(e)
+            app.logger.info(e)
+        finally:
+            cur.close()
+            con.close()
+
+    def getCiudadById(self, id):
+
+        ciudadSQL = """
+        SELECT id, descripcion
+        FROM ciudades WHERE id=%s
+        """
+        # objeto conexion
+        conexion = Conexion()
+        con = conexion.getConexion()
+        cur = con.cursor()
+        try:
+            cur.execute(ciudadSQL, (id,))
+            # trae datos de la bd
+            ciudadEncontrada = cur.fetchone()
+            # retorno los datos
+            return {
+                    "id": ciudadEncontrada[0],
+                    "descripcion": ciudadEncontrada[1]
+                }
+        except con.Error as e:
+            app.logger.info(e)
         finally:
             cur.close()
             con.close()
@@ -45,6 +70,37 @@ class CiudadDao:
         # Ejecucion exitosa
         try:
             cur.execute(insertCiudadSQL, (descripcion,))
+            # se confirma la insercion
+            con.commit()
+
+            return True
+
+        # Si algo fallo entra aqui
+        except con.Error as e:
+            app.logger.info(e)
+
+        # Siempre se va ejecutar
+        finally:
+            cur.close()
+            con.close()
+
+        return False
+
+    def updateCiudad(self, id, descripcion):
+
+        updateCiudadSQL = """
+        UPDATE ciudades
+        SET descripcion=%s
+        WHERE id=%s
+        """
+
+        conexion = Conexion()
+        con = conexion.getConexion()
+        cur = con.cursor()
+
+        # Ejecucion exitosa
+        try:
+            cur.execute(updateCiudadSQL, (descripcion, id,))
             # se confirma la insercion
             con.commit()
 

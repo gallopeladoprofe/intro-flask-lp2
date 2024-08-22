@@ -32,26 +32,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Asunción</td>
-                        <td>
-                          <div class="row">
-                            <div class="col col-md-2">
-                              <button type="button" class="btn btn-primary">Editar</button>
-                            </div>
-                            <div class="col col-md-2">
-                              <button type="button" class="btn btn-danger">Eliminar</button>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
                       {% for item in lista_ciudades %}
                       <tr>
                         <td>{{ item['descripcion'] }}</td>
                         <td>
                           <div class="row">
                             <div class="col col-md-2">
-                              <button type="button" class="btn btn-primary">Editar</button>
+                              <a href="{{ url_for('ciudadesEditar', id=item['id']) }}" class="btn btn-primary">Editar</a>
                             </div>
                             <div class="col col-md-2">
                               <button type="button" class="btn btn-danger">Eliminar</button>
