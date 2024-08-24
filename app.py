@@ -82,11 +82,26 @@ def ciudadesEliminar(id):
     return redirect(url_for('ciudades_index'))
 
 # Pais
+from dao.PaisDao import PaisDao
 @app.route('/paises-index')
 def paisesIndex():
-    from dao.PaisDao import PaisDao
     p = PaisDao()
     return render_template('paises-index.html', paises=p.getPaises())
+
+@app.route('/paises-formulario-agregar')
+def paisesFormularioAgregar():
+    return render_template('paises-formulario-agregar.html')
+
+@app.route('/guardar-pais', methods=['POST'])
+def guardarPais():
+    descripcion = request.form.get('txtDescripcion').strip().upper()
+    if not descripcion:
+        flash('Guarde al menos un pais', 'warning')
+        return redirect(url_for('paisesFormularioAgregar'))
+    p = PaisDao()
+    p.guardarPais(descripcion)
+    flash('Guardado exitoso', 'success')
+    return redirect(url_for('paisesIndex'))
 
 # se pregunta por el proceso principal
 if __name__=='__main__':
