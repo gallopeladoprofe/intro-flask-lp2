@@ -81,6 +81,13 @@ def ciudadesEliminar(id):
     ciudaddao.deleteCiudad(id)
     return redirect(url_for('ciudades_index'))
 
+# Pais
+@app.route('/paises-index')
+def paisesIndex():
+    from dao.PaisDao import PaisDao
+    p = PaisDao()
+    return render_template('paises-index.html', paises=p.getPaises())
+
 # se pregunta por el proceso principal
 if __name__=='__main__':
     app.run(debug=True)
